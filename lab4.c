@@ -100,7 +100,7 @@ int main()
     change_name1_right_a(quinn);
     printf("%c\n", quinn->name[0]);
 
-    char name[5] = "Allan"; 
+    char name[6] = "Allan\0"; 
     student3 *allan; 
     change_name(allan, name);
     printf("%s", allan->name);
