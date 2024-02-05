@@ -13,7 +13,7 @@ void change_name(student3 *s, char name[])
         s->name[i] = '\0';
     }
 
-    int min = sizeof(s->name) < sizeof(name) ? sizeof(s->name) : sizeof(name);
+    int min = sizeof((char *)s->name) < sizeof((char *)name) ? sizeof((char *)s->name) : sizeof((char *)name);
     for (int i = 0; i < min; i++){
         s->name[i] = name[i];
     }
