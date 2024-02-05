@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "student3.h"
 
 float my_atoi(const char *str)
 {
@@ -56,6 +57,28 @@ float sum(const char *filename)
     return sum;
 }
 
+// Question 3 
+void change_name1_wrong(student3 s) 
+{
+    // s acts like a local variable, it is lost after the function ends
+    s.name[0] = 'b'; 
+}
+
+void change_name1_right_a(student3 *p_s)
+{
+    // passes a pointer for student3 into the function
+    // correctly dereferences the pointer to the student, assigns it the char array 
+    // modifies addresses, NOT local variables 
+    p_s->name[0] = 'b';
+}
+
+void change_name1_right_b(student3 *p_s) 
+{
+    // same idea as above
+    strcpy(p_s->name, "b");
+}
+
+
 int main() 
 {
     /*
@@ -71,5 +94,14 @@ int main()
     */
 
     // seg fault: access area of memory it was not supposed to access 
-    printf("%f", sum("lab4.txt"));
+    //printf("%f", sum("lab4.txt"));
+
+    student3 *quinn;
+    change_name1_right_a(quinn);
+    printf("%c\n", quinn->name[0]);
+
+    char name[5] = "Allan"; 
+    student3 *allan; 
+    change_name(allan, name);
+    printf("%s", allan->name);
 }
