@@ -2,31 +2,37 @@
 #include <stdlib.h>
 #include <string.h>
 
-int my_atoi(const char *str)
+float my_atoi(const char *str)
 {
     int i = 0;
     int sign = 1;
 
-    if(str[i] == "-"){
+    if(str[i] == '-'){
         sign = -1;
         i++;
     }
 
     int result = 0;
     int passed_equal = 0; 
-
+    int passedDot = 0;
+    int divider = 1;
     for(int s = 0; s < strlen(str); s++) {
         if (passed_equal == 1) {
             // deal with decimal
             while((str[s + i] >= '0' && str[s + i] <= '9') || str[s+i] == '.') {
+                if (passedDot == 1){
+                    divider *= 10;
+                }
                 if (str[s+i] != '.') {
                     result = result * 10 + (str[s + i] - '0');
                     //printf("%d\n", result);
                 }
+                else{passedDot=1;}
                 i++;
+                
             }
-            printf("%f\n", result * sign);
-            return result * sign; 
+            printf("%d\n", result * sign);
+            return (float)(result * sign)/(float)divider; 
         }
 
         else if (str[s] == '=') {
@@ -35,9 +41,9 @@ int my_atoi(const char *str)
     }
 }
 
-int sum(const char *filename) 
+float sum(const char *filename) 
 {
-    float sum = 0.0; 
+    double sum = 0.0; 
     char line[200]; 
     FILE *fp = fopen(filename, "r"); 
 
